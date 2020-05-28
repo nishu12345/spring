@@ -1,7 +1,7 @@
-# spring
-Spring Boot Application Structure
+# Spring Boot Application Structure
+
 -Database Configuration
--Swagger Consfiguration
+-Swagger Configuration
 -Spring Cloud Configuration
 -Spring Boot 2.3.0
 -Java 11 Amazon Cornetto 

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 public class UserRegisterDaoImpl implements UserRegisterDao {
 
     private SessionFactory sessionFactory;
-    
+
     public UserRegisterDaoImpl(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }

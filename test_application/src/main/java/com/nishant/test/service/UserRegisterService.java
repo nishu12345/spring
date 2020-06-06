@@ -6,6 +6,6 @@ import com.nishant.test.response.RegisterUserResponse;
 import java.util.Optional;
 
 public interface UserRegisterService {
-    
+
     public Optional<RegisterUserResponse> registerUser(RegisterUserRequest userRequest);
 }

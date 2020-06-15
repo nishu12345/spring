@@ -41,60 +41,60 @@ public class FluxAndMonoTests {
                 .log();
 
         StepVerifier.create(stringPublisher)
-                .expectNext("Spring")
-                .expectNext("Spring Boot")
-                .expectNext("Reactive Spring")
-                .verifyComplete();
+                    .expectNext("Spring")
+                    .expectNext("Spring Boot")
+                    .expectNext("Reactive Spring")
+                    .verifyComplete();
     }
 
     @Test
     public void fluxTest_WithError() {
         Flux<String> stringPublisher = Flux.just("Spring", "Spring Boot", "Reactive Spring")
-                .concatWith(Flux.error(new RuntimeException("Exception Occurred")))
-                .log();
+                                           .concatWith(Flux.error(new RuntimeException("Exception Occurred")))
+                                           .log();
 
         StepVerifier.create(stringPublisher)
-                .expectNext("Spring")
-                .expectNext("Spring Boot")
-                .expectNext("Reactive Spring")
+                    .expectNext("Spring")
+                    .expectNext("Spring Boot")
+                    .expectNext("Reactive Spring")
 //                .expectError(RuntimeException.class)
-                .expectErrorMessage("Exception Occurred")
-                .verify();
+                    .expectErrorMessage("Exception Occurred")
+                    .verify();
     }
 
     @Test
     public void fluxTest_WithError1() {
         Flux<String> stringPublisher = Flux.just("Spring", "Spring Boot", "Reactive Spring")
-                .concatWith(Flux.error(new RuntimeException("Exception Occurred")))
-                .log();
+                                           .concatWith(Flux.error(new RuntimeException("Exception Occurred")))
+                                           .log();
 
         StepVerifier.create(stringPublisher)
-                .expectNext("Spring", "Spring Boot", "Reactive Spring")
-                .expectError(RuntimeException.class)
+                    .expectNext("Spring", "Spring Boot", "Reactive Spring")
+                    .expectError(RuntimeException.class)
 //                .expectErrorMessage("Exception Occurred")
-                .verify();
+                    .verify();
     }
 
     @Test
     public void fluxTestElementsCount_WithoutError() {
         Flux<String> stringPublisher = Flux.just("Spring", "Spring Boot", "Reactive Spring")
-                .log();
+                                           .log();
 
         StepVerifier.create(stringPublisher)
-                .expectNextCount(3)
-                .verifyComplete();
+                    .expectNextCount(3)
+                    .verifyComplete();
     }
 
     @Test
     public void fluxTestElementsCount_WithError() {
         Flux<String> stringPublisher = Flux.just("Spring", "Spring Boot", "Reactive Spring")
-                .concatWith(Flux.error(new RuntimeException("Exception Occurred")))
-                .log();
+                                           .concatWith(Flux.error(new RuntimeException("Exception Occurred")))
+                                           .log();
         StepVerifier.create(stringPublisher)
-                .expectNextCount(3)
-                .expectError(RuntimeException.class)
+                    .expectNextCount(3)
+                    .expectError(RuntimeException.class)
 //                .expectErrorMessage("Exception Occurred")
-                .verify();
+                    .verify();
     }
 
 
@@ -103,14 +103,15 @@ public class FluxAndMonoTests {
         Mono<String> monoPublisher = Mono.just("Spring");
 
         StepVerifier.create(monoPublisher.log())
-                .expectNext("Spring")
-                .verifyComplete();
+                    .expectNext("Spring")
+                    .verifyComplete();
     }
 
     @Test
     public void monoErrorTest() {
-        StepVerifier.create(Mono.error(new RuntimeException("Exception Occurred")).log())
-                .expectError(RuntimeException.class)
-                .verify();
+        StepVerifier.create(Mono.error(new RuntimeException("Exception Occurred"))
+                                .log())
+                    .expectError(RuntimeException.class)
+                    .verify();
     }
 }

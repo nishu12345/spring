@@ -15,18 +15,18 @@ public class FluxAndMonoFilterTests {
         Flux<String> startsWithA = stringFlux.filter(name -> name.startsWith("A"));
 
         StepVerifier.create(startsWithA.log())
-                    .expectNext("Adam", "Anna")
-                    .verifyComplete();
+                .expectNext("Adam", "Anna")
+                .verifyComplete();
     }
 
     @Test
     public void filterFluxLengthTest() {
         Flux<String> nameGreaterThanFourCharacter = Flux.fromIterable(people)
-                                                        .filter(name -> name.length() > 4);
-
+                .filter(name -> name.length() > 4);
+        
         StepVerifier.create(nameGreaterThanFourCharacter)
-                    .expectNext("Maria")
-                    .verifyComplete();
+                .expectNext("Maria")
+                .verifyComplete();
     }
 
 

@@ -2,6 +2,7 @@ package com.nishant.springreactive.fluxandmonotests;
 
 import org.junit.jupiter.api.Test;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
 import java.util.List;
@@ -43,5 +44,29 @@ public class FluxAndMonoFactoryTests {
                 .expectNext("BasketBall")
                 .verifyComplete();
     }
-
+    
+    
+    @Test
+    public void monoUsingJustOrEmpty(){
+        Mono<String> emptyMono = Mono.justOrEmpty(null);
+        StepVerifier.create(emptyMono.log())
+                .verifyComplete();
+    }
+    
+    @Test
+    public void monoUsingSupplier(){
+        Mono<String> stringMono = Mono.fromSupplier(() -> "Adam");
+        
+        StepVerifier.create(stringMono.log())
+                .expectNext("Adam")
+                .verifyComplete();
+    }
+    
+    @Test
+    public void fluxUsingRange(){
+        Flux<Integer> integerFlux = Flux.range(1, 5);
+        StepVerifier.create(integerFlux.log())
+                .expectNext(1,2,3,4,5)
+                .verifyComplete();
+    }
 }

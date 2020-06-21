@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
 
 import java.time.Duration;
+import java.util.List;
 
 @RestController
 public class FluxAndMonoController {
@@ -16,7 +17,7 @@ public class FluxAndMonoController {
      * */
     @GetMapping("/getIntegerFlux")
     public Flux<Integer> getIntegerFlux() {
-        return Flux.range(1, 5)
+        return Flux.range(1, 4)
                    .delayElements(Duration.ofSeconds(1))
                    .log();
     }
@@ -28,8 +29,14 @@ public class FluxAndMonoController {
      * */
     @GetMapping(value = "/getIntegerFluxAsStream", produces = MediaType.APPLICATION_STREAM_JSON_VALUE)
     public Flux<Integer> getIntegerFluxAsStream() {
-        return Flux.range(1, 5)
+        return Flux.range(1, 4)
                    .delayElements(Duration.ofSeconds(1))
                    .log();
+    }
+
+    @GetMapping(value = "/getIntegerListASFlux", produces = MediaType.APPLICATION_STREAM_JSON_VALUE)
+    public Flux<Integer> getIntegerList() {
+        return Flux.fromIterable(List.of(1, 2, 3, 4))
+                   .delayElements(Duration.ofSeconds(1));
     }
 }

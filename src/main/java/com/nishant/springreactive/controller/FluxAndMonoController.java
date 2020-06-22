@@ -4,12 +4,14 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 import java.time.Duration;
 import java.util.List;
 
 @RestController
 public class FluxAndMonoController {
+
 
     /*Here we are sending the flux, but browser is doing the blocking way of communication
      * i.e it will display data once all data has been reached to it, similar as a typical
@@ -39,4 +41,16 @@ public class FluxAndMonoController {
         return Flux.fromIterable(List.of(1, 2, 3, 4))
                    .delayElements(Duration.ofSeconds(1));
     }
+
+    @GetMapping(value = "/getInfiniteFlux", produces = MediaType.APPLICATION_STREAM_JSON_VALUE)
+    public Flux<Long> getInfiniteFlux() {
+        return Flux.interval(Duration.ofSeconds(1));
+    }
+
+    @GetMapping(value = "/getIntegerMono", produces = MediaType.APPLICATION_STREAM_JSON_VALUE)
+    public Mono<Integer> getIntegerMono() {
+        return Mono.just(1);
+    }
+
+
 }

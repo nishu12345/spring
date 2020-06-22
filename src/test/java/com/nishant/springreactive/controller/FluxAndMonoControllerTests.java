@@ -24,6 +24,9 @@ public class FluxAndMonoControllerTests {
 
     /*
      * This is the first approach to call api using WebTestClient.
+     * Here we are getting response in form of Flux<T> as we are using
+     * returnResult(T.class) method and from it fetching response body by
+     * getResponseBody() method.
      * */
     @Test
     public void flux_approach1() {
@@ -44,7 +47,9 @@ public class FluxAndMonoControllerTests {
 
     /*
      * Second approach to call api using WebTestClient. Here we are validating
-     * the total count of output using hasSize() method.
+     * the total count of output using hasSize() method. As we have used expectBodyList(T.class)
+     * we will not get Flux, but it will wait for all the data to be emitted and then convert it
+     * to List.
      * */
     @Test
     public void flux_approach2() {
@@ -64,7 +69,10 @@ public class FluxAndMonoControllerTests {
      * Third approach to call api using WebTestClient.
      * Here we can convert flux to list. expectBodyList() will wait
      * until receiving all the data and then convert it into List<Integer>.
+     * expectBodyList(T.class) is used to get response in List<T> type.
+     * To do so we need to call returnResult().getResponseBody().
      * */
+
     @Test
     public void flux_approach3() {
         List<Integer> expectedResult = List.of(1, 2, 3, 4);
@@ -79,6 +87,10 @@ public class FluxAndMonoControllerTests {
         assertEquals(expectedResult, listEntityExchangeResult.getResponseBody());
     }
 
+    /*
+     * As we have used expectBody(T.class) method it is going to give response
+     * as List, so our consumeWith() method's assertEqual is successfully passed.
+     * */
     @Test
     public void flux_approach4() {
         List<Integer> expectedList = List.of(1, 2, 3, 4);
@@ -90,6 +102,44 @@ public class FluxAndMonoControllerTests {
                      .isOk()
                      .expectBodyList(Integer.class)
                      .consumeWith(result -> assertEquals(expectedList, result.getResponseBody()));
+    }
+
+    /*
+     * This is the approach to test infinte flux. We need to cancel() the flux
+     * and then verify it.
+     * */
+    @Test
+    public void infiniteFlux_Test() {
+        Flux<Long> infiniteFlux = webTestClient.get()
+                                               .uri("/getInfiniteFlux")
+                                               .accept(MediaType.APPLICATION_STREAM_JSON)
+                                               .exchange()
+                                               .expectStatus()
+                                               .isOk()
+                                               .returnResult(Long.class)
+                                               .getResponseBody();
+
+        StepVerifier.create(infiniteFlux)
+                    .expectSubscription()
+                    .expectNext(0L, 1L, 2L)
+                    .thenCancel()
+                    .verify();
+    }
+
+    /*
+     * Test case to test api which return mono. Here as we have used expectBody() method it will
+     * change Mono to Integer as we call getResponseBody() on it.
+     * */
+    @Test
+    public void integerMono_Test() {
+        webTestClient.get()
+                     .uri("/getIntegerMono")
+                     .accept(MediaType.APPLICATION_STREAM_JSON)
+                     .exchange()
+                     .expectStatus()
+                     .isOk()
+                     .expectBody(Integer.class)
+                     .consumeWith(response -> assertEquals(1, response.getResponseBody()));
     }
 
 }

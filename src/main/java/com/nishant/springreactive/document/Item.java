@@ -13,7 +13,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Item {
 
     @Id
-    private Long id;
+    private String id;
     private String description;
     private Double price;
 }

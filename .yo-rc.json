@@ -1,0 +1,40 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "com.jhipster.crud"
+    },
+    "jhipsterVersion": "6.10.1",
+    "applicationType": "gateway",
+    "baseName": "jhipster_crud",
+    "packageName": "com.jhipster.crud",
+    "packageFolder": "com/jhipster/crud",
+    "serverPort": "9090",
+    "authenticationType": "jwt",
+    "cacheProvider": "ehcache",
+    "enableHibernateCache": false,
+    "websocket": false,
+    "databaseType": "mongodb",
+    "devDatabaseType": "mongodb",
+    "prodDatabaseType": "mongodb",
+    "searchEngine": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": false,
+    "buildTool": "maven",
+    "enableSwaggerCodegen": false,
+    "jwtSecretKey": "MTA3MDBkNzRkY2JjY2QxMzhmYTIxMmViYjM1Mjg0NjFlNDQ1NTVhMzU4NTNkMmI4ZjM0OTc0N2RlMWY3ZGQ0ZjBjMmY2MWM0NTBiOGI0MmMyMzQxYTcxM2MxMDI4N2FiNjg1NTk0YmQ5MzFjMzYyOTJmZDk1MzU4NzQ3MjY1ZWI=",
+    "embeddableLaunchScript": false,
+    "useSass": true,
+    "clientPackageManager": "npm",
+    "clientFramework": "angularX",
+    "clientTheme": "none",
+    "clientThemeVariant": "",
+    "creationTimestamp": 1596131416971,
+    "testFrameworks": [],
+    "jhiPrefix": "jhi",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "otherModules": [],
+    "enableTranslation": false,
+    "blueprints": []
+  }
+}

@@ -1,8 +1,8 @@
 # JHipster
 JHipster Application Using Angular and Spring Boot
 
--Create JHipster application</b>
--Perform Crud Operation</b>
+-Create JHipster application</br>
+-Perform Crud Operation</br>
 
 https://www.youtube.com/watch?v=_697Le9H3F4&t=567s
 

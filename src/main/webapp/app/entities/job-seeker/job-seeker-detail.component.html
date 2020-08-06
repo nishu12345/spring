@@ -1,0 +1,66 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="jobSeeker">
+            <h2><span>Job Seeker</span> {{ jobSeeker.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span>Name</span></dt>
+                <dd>
+                    <span>{{ jobSeeker.name }}</span>
+                </dd>
+                <dt><span>Age</span></dt>
+                <dd>
+                    <span>{{ jobSeeker.age }}</span>
+                </dd>
+                <dt><span>Gender</span></dt>
+                <dd>
+                    <span>{{ jobSeeker.gender }}</span>
+                </dd>
+                <dt><span>Experience</span></dt>
+                <dd>
+                    <span>{{ jobSeeker.experience }}</span>
+                </dd>
+                <dt><span>Ctc</span></dt>
+                <dd>
+                    <span>{{ jobSeeker.ctc }}</span>
+                </dd>
+                <dt><span>Expected CTC</span></dt>
+                <dd>
+                    <span>{{ jobSeeker.expectedCTC }}</span>
+                </dd>
+                <dt><span>Photo</span></dt>
+                <dd>
+                    <div *ngIf="jobSeeker.photo">
+                        <a (click)="openFile(jobSeeker.photoContentType, jobSeeker.photo)">
+                            <img [src]="'data:' + jobSeeker.photoContentType + ';base64,' + jobSeeker.photo" style="max-width: 100%;" alt="jobSeeker image"/>
+                        </a>
+                        {{ jobSeeker.photoContentType }}, {{ byteSize(jobSeeker.photo) }}
+                    </div>
+                </dd>
+                <dt><span>Resume</span></dt>
+                <dd>
+                    <div *ngIf="jobSeeker.resume">
+                        <a (click)="openFile(jobSeeker.resumeContentType, jobSeeker.resume)">open</a>
+                        {{ jobSeeker.resumeContentType }}, {{ byteSize(jobSeeker.resume) }}
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/job-seeker', jobSeeker.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+            </button>
+        </div>
+    </div>
+</div>
